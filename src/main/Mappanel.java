@@ -16,8 +16,8 @@ public class Mappanel extends JPanel implements Runnable {
 	
 	public final int tilesize = Originaltilesize*scale;
 
-	public final int ScreeW = 432;
-	public final int ScreenH = 432;
+	public final int ScreeW = 1280;
+	public final int ScreenH = 720;
 	public final int maxScreenCol =  ScreeW/tilesize;
 	public final int maxScreenRow = ScreenH/tilesize;
 	int FPS = 60;
