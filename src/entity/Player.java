@@ -26,6 +26,7 @@ public class Player extends Entity {
 		x= 100;
 		y=100;
 		speed = mp.tilesize;
+		speed1= 4;
 		direction = "left";
 	}
 	public void getPlayerImage() {
@@ -62,6 +63,20 @@ public class Player extends Entity {
 			direction = "right";
 			x += speed;
 			keyH.rightPressed = false;
+		} else if (keyH.upPressed1 == true) {
+			direction = "up";
+			y -= speed1;
+		} else if (keyH.downPressed1== true) {
+			direction = "down";
+			y += speed1;
+		}
+		else if (keyH.leftPressed1 == true) {
+			direction = "left";
+			x -= speed1;
+		}
+		else if (keyH.rightPressed1 == true) {
+			direction = "right";
+			x += speed1;
 		}
 	}
 	
