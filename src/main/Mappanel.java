@@ -14,7 +14,7 @@ public class Mappanel extends JPanel implements Runnable {
 	final int Originaltilesize = 16;
 	final int scale = 3;
 	
-	public final int tilesize = Originaltilesize*scale;
+	public int tilesize = Originaltilesize*scale;
 
 	public final int ScreeW = 1280;
 	public final int ScreenH = 720;
@@ -103,6 +103,14 @@ public class Mappanel extends JPanel implements Runnable {
 	}
 	public void update() {
 		player.update();
+		if (keyH.zoomIn == true){
+			this.tilesize +=1;
+			this.run();
+		}
+		if (keyH.zoomOut == true){
+			this.tilesize -=1;
+			this.run();
+		}
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
