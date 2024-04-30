@@ -21,13 +21,18 @@ public class Mappanel extends JPanel implements Runnable {
 	public final int maxScreenCol =  ScreeW/tilesize;
 	public final int maxScreenRow = ScreenH/tilesize;
 	int FPS = 60;
-	
+
+	public final int maxWorldCols = 50;
+	public final int maxWorldRows = 50;
+	public final int worldWidth = tilesize*maxWorldCols;
+	public final int worldHeight = tilesize*maxWorldRows;
+
 	TileManager TileM = new TileManager(this);
 	
 	Thread gameThread;
 	KeyHandler keyH = new KeyHandler();
 	
-	Player player = new Player(this,keyH);
+	public Player player = new Player(this,keyH);
 
 	public Mappanel() {
 		this.setPreferredSize(new Dimension(ScreeW,ScreenH));

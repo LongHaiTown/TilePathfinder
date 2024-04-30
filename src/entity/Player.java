@@ -13,18 +13,23 @@ import main.Mappanel;
 public class Player extends Entity {
 	Mappanel mp;
 	KeyHandler keyH;
-	
+
+	public final int screenX;
+	public final int screenY;
+
 	public Player(Mappanel mp, KeyHandler keyH) {
 		super();
 		this.mp = mp;
 		this.keyH = keyH;
+		screenX = mp.ScreeW/2 - (mp.tilesize/2);
+		screenY = mp.ScreenH/2 - (mp.tilesize/2);
 		setDefaultValues();
 		getPlayerImage();
 	}
 	
 	public void setDefaultValues() {
-		x= 100;
-		y=100;
+		worldX= 12*mp.tilesize;
+		worldY=12*mp.tilesize;
 		speed = mp.tilesize;
 		speed1= 4;
 		direction = "left";
@@ -46,37 +51,37 @@ public class Player extends Entity {
 	public void update() {
 		if(keyH.upPressed == true) {
 			direction = "up";
-			y -= speed;
+			worldY -= speed;
 			keyH.upPressed = false;
 		}
 		else if (keyH.downPressed == true) {
 			direction = "down";
-			y += speed;
+			worldY += speed;
 			keyH.downPressed = false;
 		}
 		else if (keyH.leftPressed == true) {
 			direction = "left";
-			x -= speed;
+			worldX -= speed;
 			keyH.leftPressed = false;
 		}
 		else if (keyH.rightPressed == true) {
 			direction = "right";
-			x += speed;
+			worldX += speed;
 			keyH.rightPressed = false;
 		} else if (keyH.upPressed1 == true) {
 			direction = "up";
-			y -= speed1;
+			worldY -= speed1;
 		} else if (keyH.downPressed1== true) {
 			direction = "down";
-			y += speed1;
+			worldY += speed1;
 		}
 		else if (keyH.leftPressed1 == true) {
 			direction = "left";
-			x -= speed1;
+			worldX -= speed1;
 		}
 		else if (keyH.rightPressed1 == true) {
 			direction = "right";
-			x += speed1;
+			worldX += speed1;
 		}
 	}
 	
@@ -100,6 +105,6 @@ public class Player extends Entity {
                 throw new IllegalStateException("Unexpected value: " + direction);
         }
 //		g2.drawImage(image, x, y, x, y, 50, 50, 50, 50, null);
-		g2.drawImage(image,x,y,mp.tilesize,mp.tilesize,null);
+		g2.drawImage(image,screenX,screenY,mp.tilesize,mp.tilesize,null);
 	}
 }

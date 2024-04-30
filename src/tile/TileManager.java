@@ -18,7 +18,7 @@ public class TileManager {
         this.map = map;
 
         tile = new Tiles[15];
-        mapTileNum = new int[map.maxScreenCol][map.maxScreenCol];
+        mapTileNum = new int[map.maxWorldCols][map.maxWorldRows];
 
         getTileImage();
         loadMap();
@@ -44,7 +44,7 @@ public class TileManager {
         try{
             InputStream is = getClass().getResourceAsStream("/tiles/matrix.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-
+/*
             int row = 0;
             do {
                 String line = reader.readLine();
@@ -52,14 +52,32 @@ public class TileManager {
                 String[] numbers = line.split(" ");
                 int col = 0;
                 do {
-                    if (col >= map.maxScreenCol) break; // Exit the inner loop if reached maximum column
+//                    if (col >= map.maxWorldCols) break; // Exit the inner loop if reached maximum column
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
                     col++;
-                } while (col < numbers.length); // Continue until end of line
+                } while (col < map.maxWorldCols); // Continue until end of line
                 row++;
-            } while (row < map.maxScreenRow); // Continue until end of rows
+            } while (row < map.maxWorldRows); // Continue until end of rows
 
+            reader.close();
+
+ */
+            int col = 0;
+            int row = 0;
+            while (col<map.maxWorldCols && row<map.maxWorldRows){
+                String line = reader.readLine();
+                while (col< map.maxWorldCols){
+                    String numbers[] = line.split(" ");
+                    int num = Integer.parseInt(numbers[col]);
+                    mapTileNum[col][row] = num;
+                    col++;
+                }
+                if(col == map.maxWorldCols){
+                    col = 0;
+                    row++;
+                }
+            }
             reader.close();
         } catch (IOException e){
             e.printStackTrace();
@@ -67,22 +85,22 @@ public class TileManager {
 
     }
     public void draw (Graphics2D g2) {
-//        g2.drawImage(tile[0].image,0,0,map.tilesize,map.tilesize,null);
-        int col = 0;
-        int row = 0;
-        int x =0;
-        int y = 0;
-        while (col < map.maxScreenCol && row < map.maxScreenRow) {
-            int tileNum = mapTileNum[col][row];
-            g2.drawImage(tile[tileNum].image, x, y, map.tilesize, map.tilesize, null);
-            col++;
-            x += map.tilesize;
+        int worldcol = 0;
+        int worldrow = 0;
+        while (worldcol < map.maxWorldCols && worldrow < map.maxWorldRows) {
+            int tileNum = mapTileNum[worldcol][worldrow];
 
-            if (col == map.maxScreenCol) {
-                col = 0;
-                x = 0;
-                row++;
-                y += map.tilesize;
+            int worldX = worldcol*map.tilesize;
+            int worldY = worldrow*map.tilesize;
+            int screenX= worldX - map.player.worldX +map.player.screenX;
+            int screenY= worldY - map.player.worldY +map.player.screenY;
+
+            g2.drawImage(tile[tileNum].image, screenX, screenY, map.tilesize, map.tilesize, null);
+            worldcol++;
+
+            if (worldcol == map.maxWorldCols) {
+                worldcol = 0;
+                worldrow++;
             }
         }
     }
