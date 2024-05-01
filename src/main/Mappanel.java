@@ -103,14 +103,11 @@ public class Mappanel extends JPanel implements Runnable {
 	}
 	public void update() {
 		player.update();
-		if (keyH.zoomIn == true){
-			this.tilesize +=1;
-			this.run();
-		}
-		if (keyH.zoomOut == true){
-			this.tilesize -=1;
-			this.run();
-		}
+
+	}
+	public void sizeUpdate(int signal) {
+		this.tilesize +=signal;
+		repaint();
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
