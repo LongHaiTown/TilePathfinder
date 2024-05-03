@@ -33,9 +33,11 @@ public class TileManager {
 
             tile[2] = new Tiles();
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sprite_2.png"));
+            tile[2].Collision = true;
 
             tile[3] = new Tiles();
             tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sprite_3.png"));
+            tile[3].Collision = true;
         }catch (IOException e){
             e.printStackTrace();
         }
