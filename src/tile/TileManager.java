@@ -12,8 +12,8 @@ import java.io.InputStreamReader;
 public class TileManager {
 
     Mappanel map;
-    Tiles[] tile;
-    int mapTileNum[][];
+    public Tiles[] tile;
+    public int mapTileNum[][];
     public TileManager(Mappanel map){
         this.map = map;
 

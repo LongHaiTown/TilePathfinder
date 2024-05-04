@@ -1,7 +1,6 @@
 package entity;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -18,13 +17,20 @@ public class Player extends Entity {
 		super();
 		this.mp = mp;
 		this.keyH = keyH;
+
+		solidArea =new Rectangle();
+		solidArea.x =  mp.tilesize-1;
+		solidArea.y = mp.tilesize-1;
+		solidArea.height =0;
+		solidArea.width = 0;
+
 		setDefaultValues();
 		getPlayerImage();
 	}
 	
 	public void setDefaultValues() {
-		x= 100;
-		y=100;
+		x= mp.tilesize*3;
+		y= mp.tilesize*3;
 		speed = mp.tilesize;
 		speed1= 4;
 		direction = "left";
@@ -44,42 +50,57 @@ public class Player extends Entity {
 		}
 	}
 	public void update() {
-		if(keyH.upPressed == true) {
-			direction = "up";
-			y -= speed;
-			keyH.upPressed = false;
-		}
-		else if (keyH.downPressed == true) {
-			direction = "down";
-			y += speed;
-			keyH.downPressed = false;
-		}
-		else if (keyH.leftPressed == true) {
-			direction = "left";
-			x -= speed;
-			keyH.leftPressed = false;
-		}
-		else if (keyH.rightPressed == true) {
-			direction = "right";
-			x += speed;
-			keyH.rightPressed = false;
-		} else if (keyH.upPressed1 == true) {
-			direction = "up";
-			y -= speed1;
-		} else if (keyH.downPressed1== true) {
-			direction = "down";
-			y += speed1;
-		}
-		else if (keyH.leftPressed1 == true) {
-			direction = "left";
-			x -= speed1;
-		}
-		else if (keyH.rightPressed1 == true) {
-			direction = "right";
-			x += speed1;
+		if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true ||
+				keyH.upPressed1 == true || keyH.downPressed1 == true || keyH.leftPressed1 == true || keyH.rightPressed1 == true) {
+			if (keyH.upPressed == true) {
+				direction = "up";
+//				y -= speed;
+				keyH.upPressed = false;
+			} else if (keyH.downPressed == true) {
+				direction = "down";
+//				y += speed;
+				keyH.downPressed = false;
+			} else if (keyH.leftPressed == true) {
+				direction = "left";
+//				x -= speed;
+				keyH.leftPressed = false;
+			} else if (keyH.rightPressed == true) {
+				direction = "right";
+//				x += speed;
+				keyH.rightPressed = false;
+			}
+//			else if (keyH.upPressed1 == true) {
+//				direction = "up";
+//			} else if (keyH.downPressed1 == true) {
+//				direction = "down";
+//			} else if (keyH.leftPressed1 == true) {
+//				direction = "left";
+//			} else if (keyH.rightPressed1 == true) {
+//				direction = "right";
+//			}
+
+			collisionOn = false;
+			mp.cChecker.checkTile(this);
+
+					if (collisionOn == false){
+						switch (direction){
+							case "up":
+								y -= speed;
+								break;
+							case "down":
+								y += speed;
+								break;
+							case "left":
+								x -= speed;
+								break;
+							case "right":
+								direction = "right";
+								x += speed;
+								break;
+						}
+					}
 		}
 	}
-	
 	public void draw(Graphics2D g2) {
 		BufferedImage image = null;
 		switch(direction) {

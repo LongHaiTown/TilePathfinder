@@ -11,7 +11,7 @@ import tile.TileManager;
 public class Mappanel extends JPanel implements Runnable {
 
 	
-	final int Originaltilesize = 16;
+	final int Originaltilesize = 10;
 	final int scale = 3;
 	
 	public final int tilesize = Originaltilesize*scale;
@@ -22,11 +22,12 @@ public class Mappanel extends JPanel implements Runnable {
 	public final int maxScreenRow = ScreenH/tilesize;
 	int FPS = 60;
 	
-	TileManager TileM = new TileManager(this);
+	public TileManager TileM = new TileManager(this);
 	
 	Thread gameThread;
 	KeyHandler keyH = new KeyHandler();
-	
+	public CollisionChecker cChecker = new CollisionChecker((this));
+
 	Player player = new Player(this,keyH);
 
 	public Mappanel() {
