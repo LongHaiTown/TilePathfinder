@@ -10,13 +10,19 @@ import main.KeyHandler;
 import main.Mappanel;
 
 public class Player extends Entity {
-	Mappanel mp;
-	KeyHandler keyH;
+	protected Mappanel mp;
+	protected KeyHandler keyH;
+
+	public final int screenX;
+	public final int screenY;
 	
 	public Player(Mappanel mp, KeyHandler keyH) {
 		super();
 		this.mp = mp;
 		this.keyH = keyH;
+
+		screenX =mp.ScreeW/2;
+		screenY = mp.ScreenH/2;
 
 		solidArea =new Rectangle();
 		solidArea.x =  mp.tilesize-1;
@@ -29,10 +35,10 @@ public class Player extends Entity {
 	}
 	
 	public void setDefaultValues() {
-		x= mp.tilesize*3;
-		y= mp.tilesize*3;
+		x= mp.tilesize *10;
+		y= mp.tilesize *10;
 		speed = mp.tilesize;
-		speed1= 4;
+		speed1= 10;
 		direction = "left";
 	}
 	public void getPlayerImage() {
@@ -50,8 +56,7 @@ public class Player extends Entity {
 		}
 	}
 	public void update() {
-		if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true ||
-				keyH.upPressed1 == true || keyH.downPressed1 == true || keyH.leftPressed1 == true || keyH.rightPressed1 == true) {
+		if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true ) {
 			if (keyH.upPressed == true) {
 				direction = "up";
 //				y -= speed;

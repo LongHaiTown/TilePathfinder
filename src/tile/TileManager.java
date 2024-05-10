@@ -18,7 +18,7 @@ public class TileManager {
         this.map = map;
 
         tile = new Tiles[15];
-        mapTileNum = new int[map.maxScreenCol][map.maxScreenCol];
+        mapTileNum = new int[map.maxWorldCol][map.maxWorldRow];
 
         getTileImage();
         loadMap();
@@ -54,13 +54,13 @@ public class TileManager {
                 String[] numbers = line.split(" ");
                 int col = 0;
                 do {
-                    if (col >= map.maxScreenCol) break; // Exit the inner loop if reached maximum column
+                    if (col >= map.maxWorldCol) break; // Exit the inner loop if reached maximum column
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
                     col++;
                 } while (col < numbers.length); // Continue until end of line
                 row++;
-            } while (row < map.maxScreenRow); // Continue until end of rows
+            } while (row < map.maxWorldRow); // Continue until end of rows
 
             reader.close();
         } catch (IOException e){
@@ -85,6 +85,37 @@ public class TileManager {
                 x = 0;
                 row++;
                 y += map.tilesize;
+            }
+        }
+    }
+    public void draw2 (Graphics2D g2) {
+//        g2.drawImage(tile[0].image,0,0,map.tilesize,map.tilesize,null);
+        int col = 0;
+        int row = 0;
+
+        while (col < map.maxWorldCol && row < map.maxWorldRow) {
+            int tileNum = mapTileNum[col][row];
+
+            int worldX = col * map.tilesize;
+            int worldY = row * map.tilesize;
+            int screenX = worldX - map.camera.x ;
+            int screenY = worldY - map.camera.y ;
+//            int screenX = worldX - map.player.x + map.player.screenX;
+//            int screenY = worldY - map.player.y + map.player.screenY;
+//            if (worldX > map.camera.x - map.camera.screenX &&
+//                    worldX < map.camera.x + map.camera.screenX &&
+//                    worldY > map.camera.y - map.camera.screenY &&
+//                    worldY < map.camera.y + map.camera.screenY  ) {
+//
+//                g2.drawImage(tile[tileNum].image, screenX, screenY, map.tilesize, map.tilesize, null);
+//            }
+            g2.drawImage(tile[tileNum].image, screenX, screenY, map.tilesize, map.tilesize, null);
+
+            col++;
+
+            if (col == map.maxWorldCol) {
+                col = 0;
+                row++;
             }
         }
     }

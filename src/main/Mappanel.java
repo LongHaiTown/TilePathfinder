@@ -16,10 +16,14 @@ public class Mappanel extends JPanel implements Runnable {
 	
 	public final int tilesize = Originaltilesize*scale;
 
-	public final int ScreeW = 1280;
-	public final int ScreenH = 720;
+	public final int ScreeW = 1600;
+	public final int ScreenH = 900;
 	public final int maxScreenCol =  ScreeW/tilesize;
 	public final int maxScreenRow = ScreenH/tilesize;
+
+	public final int maxWorldCol =50;
+	public final int maxWorldRow = 50;
+
 	int FPS = 60;
 	
 	public TileManager TileM = new TileManager(this);
@@ -28,7 +32,9 @@ public class Mappanel extends JPanel implements Runnable {
 	KeyHandler keyH = new KeyHandler();
 	public CollisionChecker cChecker = new CollisionChecker((this));
 
-	Player player = new Player(this,keyH);
+
+	public Player player = new Player(this,keyH);
+	public Player camera = new Camera(this,keyH);
 
 	public Mappanel() {
 		this.setPreferredSize(new Dimension(ScreeW,ScreenH));
@@ -99,15 +105,16 @@ public class Mappanel extends JPanel implements Runnable {
 	}
 	public void update() {
 		player.update();
+		camera.update();
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
 		Graphics2D g2 = (Graphics2D)g;
-//		
+
 //		TileM.draw(g2);
-//
-		TileM.draw(g2);
+////
+		TileM.draw2(g2);
 		player.draw(g2);
 
 	}
