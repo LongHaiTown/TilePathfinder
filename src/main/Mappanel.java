@@ -11,18 +11,18 @@ import tile.TileManager;
 public class Mappanel extends JPanel implements Runnable {
 
 	
-	final int Originaltilesize = 10;
+	final int Originaltilesize = 20;
 	final int scale = 3;
 	
-	public final int tilesize = Originaltilesize*scale;
+	public int tilesize = Originaltilesize*scale;
 
-	public final int ScreeW = 1600;
-	public final int ScreenH = 900;
+	public final int ScreeW = 1280;
+	public final int ScreenH = 720;
 	public final int maxScreenCol =  ScreeW/tilesize;
 	public final int maxScreenRow = ScreenH/tilesize;
 
-	public final int maxWorldCol =50;
-	public final int maxWorldRow = 50;
+	public final int maxWorldCol =100;
+	public final int maxWorldRow = 100;
 
 	int FPS = 60;
 	
@@ -32,8 +32,6 @@ public class Mappanel extends JPanel implements Runnable {
 	KeyHandler keyH = new KeyHandler();
 	public CollisionChecker cChecker = new CollisionChecker((this));
 
-
-	public Player player = new Player(this,keyH);
 	public Player camera = new Camera(this,keyH);
 
 	public Mappanel() {
@@ -104,18 +102,24 @@ public class Mappanel extends JPanel implements Runnable {
 		}
 	}
 	public void update() {
-		player.update();
 		camera.update();
+		if (keyH.sizeIncrease){
+			this.tilesize ++;
+			repaint();
+			keyH.sizeIncrease = false;
+		}
+		if (keyH.sizeDecrease){
+			this.tilesize --;
+			repaint();
+			keyH.sizeDecrease = false;
+		}
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
 		Graphics2D g2 = (Graphics2D)g;
 
-//		TileM.draw(g2);
-////
-		TileM.draw2(g2);
-		player.draw(g2);
+		TileM.draw(g2);
 
 	}
 	

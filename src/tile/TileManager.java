@@ -13,7 +13,7 @@ public class TileManager {
 
     Mappanel map;
     public Tiles[] tile;
-    public int mapTileNum[][];
+    public int[][] mapTileNum;
     public TileManager(Mappanel map){
         this.map = map;
 
@@ -68,27 +68,7 @@ public class TileManager {
         }
 
     }
-    public void draw (Graphics2D g2) {
-//        g2.drawImage(tile[0].image,0,0,map.tilesize,map.tilesize,null);
-        int col = 0;
-        int row = 0;
-        int x =0;
-        int y = 0;
-        while (col < map.maxScreenCol && row < map.maxScreenRow) {
-            int tileNum = mapTileNum[col][row];
-            g2.drawImage(tile[tileNum].image, x, y, map.tilesize, map.tilesize, null);
-            col++;
-            x += map.tilesize;
-
-            if (col == map.maxScreenCol) {
-                col = 0;
-                x = 0;
-                row++;
-                y += map.tilesize;
-            }
-        }
-    }
-    public void draw2 (Graphics2D g2) {
+    public void draw(Graphics2D g2) {
 //        g2.drawImage(tile[0].image,0,0,map.tilesize,map.tilesize,null);
         int col = 0;
         int row = 0;
@@ -98,19 +78,15 @@ public class TileManager {
 
             int worldX = col * map.tilesize;
             int worldY = row * map.tilesize;
-            int screenX = worldX - map.camera.x ;
-            int screenY = worldY - map.camera.y ;
-//            int screenX = worldX - map.player.x + map.player.screenX;
-//            int screenY = worldY - map.player.y + map.player.screenY;
-//            if (worldX > map.camera.x - map.camera.screenX &&
-//                    worldX < map.camera.x + map.camera.screenX &&
-//                    worldY > map.camera.y - map.camera.screenY &&
-//                    worldY < map.camera.y + map.camera.screenY  ) {
-//
-//                g2.drawImage(tile[tileNum].image, screenX, screenY, map.tilesize, map.tilesize, null);
-//            }
-            g2.drawImage(tile[tileNum].image, screenX, screenY, map.tilesize, map.tilesize, null);
+            int screenX = worldX - map.camera.x + map.camera.screenX;
+            int screenY = worldY - map.camera.y + map.camera.screenY;
+            if (worldX + map.tilesize *2  > map.camera.x - map.camera.screenX &&
+                    worldX  < map.camera.x + map.camera.screenX &&
+                    worldY + map.tilesize *2 > map.camera.y - map.camera.screenY &&
+                    worldY  < map.camera.y + map.camera.screenY  ) {
 
+                g2.drawImage(tile[tileNum].image, screenX, screenY, map.tilesize, map.tilesize, null);
+            }
             col++;
 
             if (col == map.maxWorldCol) {

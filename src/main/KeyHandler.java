@@ -7,7 +7,8 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
 	public boolean upPressed, downPressed, leftPressed, rightPressed;
 	public boolean upPressed1, downPressed1, leftPressed1, rightPressed1;
-	
+	public boolean sizeIncrease, sizeDecrease;
+
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
@@ -38,6 +39,12 @@ public class KeyHandler implements KeyListener {
 		}
 		if (code == KeyEvent.VK_D) {
 			rightPressed1 = true;
+		}
+		if (code == KeyEvent.VK_J){
+			sizeDecrease = true;
+		}
+		if (code == KeyEvent.VK_K){
+			sizeIncrease =true;
 		}
 	}
 
