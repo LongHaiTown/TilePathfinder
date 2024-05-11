@@ -35,8 +35,8 @@ public class Player extends Entity {
 	}
 	
 	public void setDefaultValues() {
-		x= mp.tilesize *10;
-		y= mp.tilesize *10;
+		x= mp.tilesize - mp.camera.x + mp.camera.screenX;
+		y= mp.tilesize - mp.camera.y + mp.camera.screenY;
 		speed = mp.tilesize;
 		speed1= 10;
 		direction = "left";
@@ -56,20 +56,20 @@ public class Player extends Entity {
 		}
 	}
 	public void update() {
-		if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true ) {
-			if (keyH.upPressed == true) {
+		if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+			if (keyH.upPressed) {
 				direction = "up";
 //				y -= speed;
 				keyH.upPressed = false;
-			} else if (keyH.downPressed == true) {
+			} else if (keyH.downPressed) {
 				direction = "down";
 //				y += speed;
 				keyH.downPressed = false;
-			} else if (keyH.leftPressed == true) {
+			} else if (keyH.leftPressed) {
 				direction = "left";
 //				x -= speed;
 				keyH.leftPressed = false;
-			} else if (keyH.rightPressed == true) {
+			} else if (keyH.rightPressed) {
 				direction = "right";
 //				x += speed;
 				keyH.rightPressed = false;
@@ -85,9 +85,9 @@ public class Player extends Entity {
 //			}
 
 			collisionOn = false;
-			mp.cChecker.checkTile(this);
+//			mp.cChecker.checkTile(this);
 
-					if (collisionOn == false){
+					if (!collisionOn){
 						switch (direction){
 							case "up":
 								y -= speed;
@@ -125,7 +125,6 @@ public class Player extends Entity {
             default:
                 throw new IllegalStateException("Unexpected value: " + direction);
         }
-//		g2.drawImage(image, x, y, x, y, 50, 50, 50, 50, null);
 		g2.drawImage(image,x,y,mp.tilesize,mp.tilesize,null);
 	}
 }

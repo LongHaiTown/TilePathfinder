@@ -11,8 +11,9 @@ public class Main extends JFrame {
         Mappanel map = new Mappanel();
         windows.getContentPane().add(map);
         windows.pack();
-        windows.setLocationRelativeTo((Component)null);
+        windows.setLocationRelativeTo(null);
         windows.setVisible(true);
+        map.setupGame();
         map.startGameThread();
     }
 }
