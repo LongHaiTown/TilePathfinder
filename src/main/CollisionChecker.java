@@ -10,10 +10,10 @@ public class CollisionChecker {
     }
 
     public void checkTile(Entity en){
-        int entityLeftX = en.x + en.solidArea.x;
-        int entityRightX = en.x + en.solidArea.y + en.solidArea.width;
-        int entityTopY = en.y + en.solidArea.y;
-        int entityBotY = en.y + en.solidArea.y + en.solidArea.height;
+        int entityLeftX = (int)en.x + en.solidArea.x;
+        int entityRightX = (int)en.x + en.solidArea.y + en.solidArea.width;
+        int entityTopY = (int)en.y + en.solidArea.y;
+        int entityBotY = (int)en.y + en.solidArea.y + en.solidArea.height;
 
         int entityLeftCol = entityLeftX/mp.tilesize;
         int entityRightCol = entityRightX /mp.tilesize;
@@ -24,34 +24,34 @@ public class CollisionChecker {
 
         switch (en.direction){
             case "up":
-                entityTopRow = (entityTopY - en.speed)/ mp.tilesize;
+                entityTopRow = (entityTopY - (int)en.speed)/ mp.tilesize;
                 tileNum1 = mp.TileM.mapTileNum[entityLeftCol][entityTopRow];
                 tileNum2 = mp.TileM.mapTileNum[entityRightCol][entityTopRow];
-                if (mp.TileM.tile[tileNum1].Collision == true || mp.TileM.tile[tileNum2].Collision == true){
+                if (mp.TileM.tile[tileNum1].Collision || mp.TileM.tile[tileNum2].Collision){
                     en.collisionOn = true;
                 }
                 break;
             case "down":
-                entityBotRow = (entityBotY + en.speed)/ mp.tilesize;
+                entityBotRow = (entityBotY + (int)en.speed)/ mp.tilesize;
                 tileNum1 = mp.TileM.mapTileNum[entityLeftCol][entityBotRow];
                 tileNum2 = mp.TileM.mapTileNum[entityRightCol][entityBotRow];
-                if (mp.TileM.tile[tileNum1].Collision == true || mp.TileM.tile[tileNum2].Collision == true){
+                if (mp.TileM.tile[tileNum1].Collision || mp.TileM.tile[tileNum2].Collision){
                     en.collisionOn = true;
                 }
                 break;
             case "left":
-                entityLeftCol = (entityLeftX - en.speed)/ mp.tilesize;
+                entityLeftCol = (entityLeftX - (int)en.speed)/ mp.tilesize;
                 tileNum1 = mp.TileM.mapTileNum[entityLeftCol][entityTopRow];
                 tileNum2 = mp.TileM.mapTileNum[entityLeftCol][entityBotRow];
-                if (mp.TileM.tile[tileNum1].Collision == true || mp.TileM.tile[tileNum2].Collision == true){
+                if (mp.TileM.tile[tileNum1].Collision || mp.TileM.tile[tileNum2].Collision){
                     en.collisionOn = true;
                 }
                 break;
             case "right":
-                entityRightCol = (entityRightX + en.speed)/ mp.tilesize;
+                entityRightCol = (entityRightX + (int)en.speed)/ mp.tilesize;
                 tileNum1 = mp.TileM.mapTileNum[entityRightCol][entityTopRow];
                 tileNum2 = mp.TileM.mapTileNum[entityRightCol][entityBotRow];
-                if (mp.TileM.tile[tileNum1].Collision == true || mp.TileM.tile[tileNum2].Collision == true){
+                if (mp.TileM.tile[tileNum1].Collision || mp.TileM.tile[tileNum2].Collision){
                     en.collisionOn = true;
                 }
                 break;
