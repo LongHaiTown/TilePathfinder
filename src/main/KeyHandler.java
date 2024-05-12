@@ -8,7 +8,11 @@ public class KeyHandler implements KeyListener {
 	public boolean upPressed, downPressed, leftPressed, rightPressed;
 	public boolean upPressed1, downPressed1, leftPressed1, rightPressed1;
 	public boolean sizeIncrease, sizeDecrease;
+	Mappanel mp;
 
+	public KeyHandler(Mappanel mp){
+		this.mp = mp;
+	}
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
@@ -41,10 +45,10 @@ public class KeyHandler implements KeyListener {
 			rightPressed1 = true;
 		}
 		if (code == KeyEvent.VK_J){
-			sizeDecrease = true;
+			mp.ZoomInOut(1);
 		}
 		if (code == KeyEvent.VK_K){
-			sizeIncrease =true;
+			mp.ZoomInOut(-1);
 		}
 	}
 

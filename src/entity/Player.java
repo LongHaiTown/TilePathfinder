@@ -35,9 +35,10 @@ public class Player extends Entity {
 	}
 	
 	public void setDefaultValues() {
-		x= mp.tilesize - mp.camera.x + mp.camera.screenX;
-		y= mp.tilesize - mp.camera.y + mp.camera.screenY;
-		speed = mp.tilesize;
+		x= mp.tilesize*12 - mp.camera.x + mp.camera.screenX;
+		y= mp.tilesize*12 - mp.camera.y + mp.camera.screenY;
+//		speed = mp.tilesize;
+		speed = mp.worldWidth/(mp.worldWidth/mp.tilesize);
 		speed1= 10;
 		direction = "left";
 	}
@@ -125,6 +126,6 @@ public class Player extends Entity {
             default:
                 throw new IllegalStateException("Unexpected value: " + direction);
         }
-		g2.drawImage(image,x,y,mp.tilesize,mp.tilesize,null);
+		g2.drawImage(image,(int)x,(int)y,mp.tilesize,mp.tilesize,null);
 	}
 }

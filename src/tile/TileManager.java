@@ -78,14 +78,14 @@ public class TileManager {
 
             int worldX = col * map.tilesize;
             int worldY = row * map.tilesize;
-            int screenX = worldX - map.camera.x + map.camera.screenX;
-            int screenY = worldY - map.camera.y + map.camera.screenY;
+            double screenX = worldX - map.camera.x + map.camera.screenX;
+            double screenY = worldY - map.camera.y + map.camera.screenY;
             if (worldX + map.tilesize *2  > map.camera.x - map.camera.screenX &&
                     worldX  < map.camera.x + map.camera.screenX &&
                     worldY + map.tilesize *2 > map.camera.y - map.camera.screenY &&
                     worldY  < map.camera.y + map.camera.screenY  ) {
 
-                g2.drawImage(tile[tileNum].image, screenX, screenY, map.tilesize, map.tilesize, null);
+                g2.drawImage(tile[tileNum].image, (int)screenX, (int)screenY, map.tilesize, map.tilesize, null);
             }
             col++;
 

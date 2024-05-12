@@ -11,25 +11,26 @@ import tile.TileManager;
 public class Mappanel extends JPanel implements Runnable {
 
 	
-	final int Originaltilesize = 10;
+	final int Originaltilesize = 16;
 	final int scale = 3;
 	
 	public int tilesize = Originaltilesize*scale;
 
-	public final int ScreeW = 1200;
-	public final int ScreenH = 720;
+	public final int ScreeW = 600;
+	public final int ScreenH = 600;
 	public final int maxScreenCol =  ScreeW/tilesize;
 	public final int maxScreenRow = ScreenH/tilesize;
 
 	public final int maxWorldCol =200;
 	public final int maxWorldRow = 200;
-
+	public final int worldWidth = tilesize *maxWorldCol;
+	public final int worldHeight = tilesize* maxWorldRow;
 	int FPS = 60;
 	
 	public TileManager TileM = new TileManager(this);
 	
 	Thread gameThread;
-	KeyHandler keyH = new KeyHandler();
+	KeyHandler keyH = new KeyHandler(this);
 //	public CollisionChecker cChecker = new CollisionChecker((this));
 
 	public Player camera = new Camera(this,keyH);
@@ -106,19 +107,34 @@ public class Mappanel extends JPanel implements Runnable {
 
 		}
 	}
+	public void ZoomInOut(int i){
+		int oldWorldWidth = tilesize *maxWorldCol;
+		this.tilesize += i;
+		int newWorldWidth = tilesize *maxWorldCol;
+
+		double multiplier = (double) newWorldWidth /oldWorldWidth;
+
+		double newPlayerWorldX = camera.x *multiplier;
+		double newPlayerWorldY = camera.y *multiplier;
+
+		player.speed =  newWorldWidth/(newWorldWidth/tilesize);
+		camera.x = newPlayerWorldX ;
+		camera.y = newPlayerWorldY ;
+
+	}
 	public void update() {
 		camera.update();
 		player.update();
-		if (keyH.sizeIncrease){
-			this.tilesize ++;
-			repaint();
-			keyH.sizeIncrease = false;
-		}
-		if (keyH.sizeDecrease){
-			this.tilesize --;
-			repaint();
-			keyH.sizeDecrease = false;
-		}
+//		if (keyH.sizeIncrease){
+//			this.tilesize ++;
+//			repaint();
+//			keyH.sizeIncrease = false;
+//		}
+//		if (keyH.sizeDecrease){
+//			this.tilesize --;
+//			repaint();
+//			keyH.sizeDecrease = false;
+//		}
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

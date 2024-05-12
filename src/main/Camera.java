@@ -2,6 +2,7 @@ package main;
 
 import entity.Player;
 
+import javax.swing.plaf.PanelUI;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -13,7 +14,7 @@ public class Camera extends Player {
     }
     @Override
     public void setDefaultValues(){
-        x= mp.tilesize*20 ;
+        x= mp.tilesize*12 ;
         y= mp.tilesize*12 ;
         speed = mp.tilesize;
         speed1= 10;
@@ -38,5 +39,27 @@ public class Camera extends Player {
             mp.player.x -=speed1;
         }
     }
+    public void draw (Graphics2D g2){
+        BufferedImage image = null;
+        switch(direction) {
+            case "up":
+                image = up1;
+                break;
+            case "down":
+                image = down1;
+                break;
+            case "left":
+                image = left1;
+                break;
+            case "right":
+                image = right1;
+                break;
+
+            default:
+                throw new IllegalStateException("Unexpected value: " + direction);
+        }
+        g2.drawImage(image,screenX,screenY,mp.tilesize,mp.tilesize,null);
+    }
+
 }
 
