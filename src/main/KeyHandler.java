@@ -45,10 +45,13 @@ public class KeyHandler implements KeyListener {
 			rightPressed1 = true;
 		}
 		if (code == KeyEvent.VK_J){
-			mp.ZoomInOut(1);
+			mp.ZoomInOut(2);
 		}
 		if (code == KeyEvent.VK_K){
-			mp.ZoomInOut(-1);
+			mp.ZoomInOut(-2);
+		}
+		if (code == KeyEvent.VK_SPACE){
+			mp.CenteringCamera();
 		}
 	}
 

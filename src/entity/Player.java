@@ -42,6 +42,13 @@ public class Player extends Entity {
 		speed1= 10;
 		direction = "left";
 	}
+
+	public int getTileXLocationNum() {
+		return (int) ((x+ mp.camera.x - mp.camera.screenX)/mp.tilesize);
+	}
+	public int getTileYLocationNum() {
+		return (int) ((y+ mp.camera.y - mp.camera.screenY)/mp.tilesize);
+	}
 	public void getPlayerImage() {
 		try {
 			left1 = ImageIO.read(getClass().getResourceAsStream("/player/sprite_0.png"));

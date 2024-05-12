@@ -107,7 +107,32 @@ public class Mappanel extends JPanel implements Runnable {
 
 		}
 	}
+	public void CenteringCamera(){
+		double oldCameraXLocation = camera.x;
+		camera.x= tilesize*player.getTileXLocationNum();
+		double newCameraXLocation = camera.x;
+
+		double oldCameraYLocation = camera.y;
+		camera.y= tilesize*player.getTileYLocationNum();
+		double newCameraYLocation = camera.y;
+
+		double cameraXLocationChange = oldCameraXLocation - newCameraXLocation;
+		double cameraYLocationChange = oldCameraYLocation - newCameraYLocation;
+
+		if(cameraXLocationChange > 0) {
+			player.x += Math.abs(oldCameraXLocation - newCameraXLocation);
+		}else {
+			player.x -= Math.abs(oldCameraXLocation - newCameraXLocation);
+		}
+
+		if(cameraYLocationChange > 0) {
+			player.y += Math.abs(oldCameraYLocation - newCameraYLocation);
+		}else {
+			player.y -= Math.abs(oldCameraYLocation - newCameraYLocation);
+		}
+	}
 	public void ZoomInOut(int i){
+		CenteringCamera();
 		int oldWorldWidth = tilesize *maxWorldCol;
 		this.tilesize += i;
 		int newWorldWidth = tilesize *maxWorldCol;
@@ -125,16 +150,6 @@ public class Mappanel extends JPanel implements Runnable {
 	public void update() {
 		camera.update();
 		player.update();
-//		if (keyH.sizeIncrease){
-//			this.tilesize ++;
-//			repaint();
-//			keyH.sizeIncrease = false;
-//		}
-//		if (keyH.sizeDecrease){
-//			this.tilesize --;
-//			repaint();
-//			keyH.sizeDecrease = false;
-//		}
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
