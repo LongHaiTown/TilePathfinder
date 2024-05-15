@@ -14,10 +14,10 @@ public class Camera extends Player {
     }
     @Override
     public void setDefaultValues(){
-        x= mp.tilesize*12 ;
+        x= mp.tilesize*15 ;
         y= mp.tilesize*12 ;
         speed = mp.tilesize;
-        speed1= 10;
+        speed1= 8;
     }
     @Override
     public void update() {

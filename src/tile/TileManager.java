@@ -27,16 +27,18 @@ public class TileManager {
         try {
             tile[0] = new Tiles();
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sprite_0.png"));
+            tile[0].Collision = true;
 
             tile[1] = new Tiles();
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sprite_1.png"));
+            tile[1].Collision = false;
 
             tile[2] = new Tiles();
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sprite_2.png"));
             tile[2].Collision = true;
 
             tile[3] = new Tiles();
-            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sprite_3.png"));
+            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sprite_4.png"));
             tile[3].Collision = true;
         }catch (IOException e){
             e.printStackTrace();
@@ -69,7 +71,6 @@ public class TileManager {
 
     }
     public void draw(Graphics2D g2) {
-//        g2.drawImage(tile[0].image,0,0,map.tilesize,map.tilesize,null);
         int col = 0;
         int row = 0;
 

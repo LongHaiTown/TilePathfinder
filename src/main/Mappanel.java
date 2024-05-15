@@ -16,8 +16,8 @@ public class Mappanel extends JPanel implements Runnable {
 	
 	public int tilesize = Originaltilesize*scale;
 
-	public final int ScreeW = 600;
-	public final int ScreenH = 600;
+	public final int ScreeW = 1280;
+	public final int ScreenH = 720;
 	public final int maxScreenCol =  ScreeW/tilesize;
 	public final int maxScreenRow = ScreenH/tilesize;
 
@@ -31,7 +31,7 @@ public class Mappanel extends JPanel implements Runnable {
 	
 	Thread gameThread;
 	KeyHandler keyH = new KeyHandler(this);
-//	public CollisionChecker cChecker = new CollisionChecker((this));
+	public CollisionChecker cChecker = new CollisionChecker((this));
 
 	public Player camera = new Camera(this,keyH);
 	public Player player = new Player(this,keyH);

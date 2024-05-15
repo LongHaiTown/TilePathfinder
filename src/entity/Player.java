@@ -15,7 +15,8 @@ public class Player extends Entity {
 
 	public final int screenX;
 	public final int screenY;
-	
+	public int TileXLocationNum=5;
+	public int TileYLocationNum=5;
 	public Player(Mappanel mp, KeyHandler keyH) {
 		super();
 		this.mp = mp;
@@ -25,18 +26,18 @@ public class Player extends Entity {
 		screenY = mp.ScreenH/2;
 
 		solidArea =new Rectangle();
-		solidArea.x =  mp.tilesize-1;
-		solidArea.y = mp.tilesize-1;
-		solidArea.height =0;
-		solidArea.width = 0;
+		solidArea.x = 0;
+		solidArea.y = 0;
+		solidArea.height =(mp.tilesize);
+		solidArea.width = (mp.tilesize);
 
 		setDefaultValues();
 		getPlayerImage();
 	}
 	
 	public void setDefaultValues() {
-		x= mp.tilesize*12 - mp.camera.x + mp.camera.screenX;
-		y= mp.tilesize*12 - mp.camera.y + mp.camera.screenY;
+		x= mp.tilesize*TileXLocationNum - mp.camera.x + mp.camera.screenX;
+		y= mp.tilesize*TileYLocationNum - mp.camera.y + mp.camera.screenY;
 //		speed = mp.tilesize;
 		speed = mp.worldWidth/(mp.worldWidth/mp.tilesize);
 		speed1= 10;
@@ -93,7 +94,7 @@ public class Player extends Entity {
 //			}
 
 			collisionOn = false;
-//			mp.cChecker.checkTile(this);
+			mp.cChecker.checkTile(this);
 
 					if (!collisionOn){
 						switch (direction){
@@ -112,6 +113,7 @@ public class Player extends Entity {
 								break;
 						}
 					}
+			System.out.println("Player position is [" + this.getTileXLocationNum() + "][" + this.getTileYLocationNum() + "] ");
 		}
 	}
 	public void draw(Graphics2D g2) {
