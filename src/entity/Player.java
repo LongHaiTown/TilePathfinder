@@ -111,6 +111,10 @@ public class Player extends Entity {
 								direction = "right";
 								x += speed;
 								break;
+
+						}
+						if (keyH.isCentered){
+							mp.CenteringCamera();
 						}
 					}
 			System.out.println("Player position is [" + this.getTileXLocationNum() + "][" + this.getTileYLocationNum() + "] ");

@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
 	public boolean upPressed, downPressed, leftPressed, rightPressed;
 	public boolean upPressed1, downPressed1, leftPressed1, rightPressed1;
-	public boolean sizeIncrease, sizeDecrease;
+	public boolean isCentered;
 	Mappanel mp;
 
 	public KeyHandler(Mappanel mp){
@@ -52,6 +52,12 @@ public class KeyHandler implements KeyListener {
 		}
 		if (code == KeyEvent.VK_SPACE){
 			mp.CenteringCamera();
+		}
+		if (code == KeyEvent.VK_Y){
+			if(!isCentered){
+				mp.CenteringCamera();
+				isCentered = true;
+			}else {isCentered = false;}
 		}
 	}
 
